@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import type { Fragment } from '../types/protocol'
 import type { MessageState } from '../types/state'
+import { formatMessageDate } from '../utils/date'
 
 interface TreeNode extends Fragment {
   children: TreeNode[]
@@ -52,7 +53,7 @@ export function Message({ message }: Props) {
     <div className="space-y-1">
       <div className="flex items-baseline gap-2">
         <span className="text-sm font-medium">{message.userName}</span>
-        <span className="text-xs text-neutral-400">{message.createdAt}</span>
+        <span className="text-xs text-neutral-400">{formatMessageDate(message.createdAt)}</span>
       </div>
       <div className="space-y-1">
         {tree.map(node => (
