@@ -16,7 +16,8 @@ export function DocumentByTagPage() {
   if (documents.length === 0)
     return <Empty icon={Hash} message={`No documents tagged #${tag}.`} />
 
-  return (
+  return <>
+    <title>{`#${tag}`}</title>
     <div className="flex-1 overflow-y-auto">
       <div className="mx-auto max-w-3xl space-y-8 px-4 py-6">
         <h1 className="font-mono text-sm text-neutral-400">#{tag}</h1>
@@ -25,5 +26,5 @@ export function DocumentByTagPage() {
         ))}
       </div>
     </div>
-  )
+  </>
 }

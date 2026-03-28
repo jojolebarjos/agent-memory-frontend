@@ -3,5 +3,8 @@ import { Empty } from '../components/Empty'
 
 export function DefaultPage() {
   // TODO better home page
-  return <Empty icon={Home} message="Select or create a conversation to get started." />
+  return <>
+    <title>Home</title>
+    <Empty icon={Home} message="Select or create a conversation to get started." />
+  </>
 }

@@ -40,7 +40,8 @@ export function ConversationPage() {
   if (!conversation)
     return <Empty icon={MessageSquare} message="Conversation not found." />
 
-  return (
+  return <>
+    <title>{conversation.title}</title>
     <div className="h-full">
       <Conversation
         conversation={conversation}
@@ -49,5 +50,5 @@ export function ConversationPage() {
         onSubmit={handleSubmit}
       />
     </div>
-  )
+  </>
 }
