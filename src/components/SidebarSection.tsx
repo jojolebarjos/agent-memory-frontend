@@ -18,7 +18,7 @@ export function SidebarSection({ icon, label, onAdd, children }: Props) {
             onClick={onAdd}
             className="rounded p-0.5 text-neutral-400 hover:bg-neutral-100 hover:text-neutral-600"
           >
-            <Plus size={14} />
+            <Plus className="size-[1em]" />
           </button>
         )}
       </div>

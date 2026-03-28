@@ -27,12 +27,12 @@ export function Sidebar() {
             `flex items-center gap-2 px-3 py-2 text-sm ${isActive ? 'text-neutral-900' : 'text-neutral-500 hover:text-neutral-900'}`
           }
         >
-          <Home size={16} />
+          <Home className="size-[1em]" />
           Home
         </NavLink>
 
         <SidebarSection
-          icon={<MessageSquare size={14} />}
+          icon={<MessageSquare className="size-[1em]" />}
           label="Conversations"
           onAdd={() => createConversation('New conversation')}
         >
@@ -50,7 +50,7 @@ export function Sidebar() {
         </SidebarSection>
 
         <SidebarSection
-          icon={<FileText size={14} />}
+          icon={<FileText className="size-[1em]" />}
           label="Documents"
         >
           {documents.map(document => (
@@ -67,7 +67,7 @@ export function Sidebar() {
         </SidebarSection>
 
         <SidebarSection
-          icon={<Hash size={14} />}
+          icon={<Hash className="size-[1em]" />}
           label="Tags"
         >
           {tags.map(tag => (
