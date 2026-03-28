@@ -16,6 +16,7 @@ export interface ConversationState extends Conversation {
 
 export interface WorkspaceState {
   sync: SyncState
-  conversations: Record<string, ConversationState>
   documents: Record<string, Document>
+  conversations: Record<string, ConversationState>
+  messageToConversations: Record<string, string>
 }

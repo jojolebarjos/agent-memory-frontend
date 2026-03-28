@@ -6,6 +6,8 @@ export type WebSocketStatus =
   | 'closed'
   | 'error'
 
+// TODO rename "Message" to avoid confusion with actual messages
+
 export function useWebSocket(
   url: string,
   onMessage: (msg: unknown) => void,

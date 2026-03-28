@@ -13,26 +13,31 @@ export type NotificationKind =
 
 export interface Document {
   id: string
+  createdAt: string
+  key: string
+  version: number
   title: string
+  tags: string[]
   description: string
   content: string
-  version: number
-  tags: string[]
 }
 
 export interface Conversation {
   id: string
+  createdAt: string
   title: string
 }
 
 export interface Message {
   id: string
   createdAt: string
+  conversationId: string
   userName: string
 }
 
 export interface Fragment {
   id: string
+  createdAt: string
   messageId: string
   parentId?: string
   kind: FragmentKind
@@ -40,11 +45,11 @@ export interface Fragment {
 }
 
 export type ServerEvent =
-  | { type: 'workspace.sync'; conversationCount: number; documentCount: number; messageCount: number; fragmentCount: number }
+  | { type: 'workspace.sync'; count: number }
   | { type: 'document.created'; document: Document }
   | { type: 'conversation.created'; conversation: Conversation }
-  | { type: 'message.created'; conversationId: string; message: Message }
-  | { type: 'fragment.created'; conversationId: string; fragment: Fragment }
+  | { type: 'message.created'; message: Message }
+  | { type: 'fragment.created'; fragment: Fragment }
   | { type: 'notification'; kind: NotificationKind; message: string }
 
 export type ClientCommand =

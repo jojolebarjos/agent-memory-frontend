@@ -11,8 +11,9 @@ const notificationConsole: Record<string, (...args: unknown[]) => void> = {
 
 const initialState: WorkspaceState = {
   sync: { phase: 'connecting' },
-  conversations: {},
   documents: {},
+  conversations: {},
+  messageToConversations: {},
 }
 
 function bumpSync(sync: SyncState): SyncState {
@@ -35,11 +36,18 @@ function workspaceReducer(state: WorkspaceState, action: WorkspaceAction): Works
       }
 
     case 'workspace.sync':
+      if (action.count <= 0)
+        return {
+          ...initialState,
+          sync: {
+            phase: 'ready',
+          },
+        }
       return {
         ...initialState,
         sync: {
           phase: 'syncing',
-          total: action.conversationCount + action.documentCount + action.messageCount + action.fragmentCount,
+          total: action.count,
           received: 0,
         },
       }
@@ -65,13 +73,13 @@ function workspaceReducer(state: WorkspaceState, action: WorkspaceAction): Works
       }
 
     case 'message.created': {
-      const conversation = state.conversations[action.conversationId]
+      const conversation = state.conversations[action.message.conversationId]
       return {
         ...state,
         sync: bumpSync(state.sync),
         conversations: {
           ...state.conversations,
-          [action.conversationId]: {
+          [action.message.conversationId]: {
             ...conversation,
             messages: {
               ...conversation.messages,
@@ -79,18 +87,23 @@ function workspaceReducer(state: WorkspaceState, action: WorkspaceAction): Works
             },
           },
         },
+        messageToConversations: {
+          ...state.messageToConversations,
+          [action.message.id]: action.message.conversationId,
+        }
       }
     }
 
     case 'fragment.created': {
-      const conversation = state.conversations[action.conversationId]
+      const conversationId = state.messageToConversations[action.fragment.messageId]
+      const conversation = state.conversations[conversationId]
       const message = conversation.messages[action.fragment.messageId]
       return {
         ...state,
         sync: bumpSync(state.sync),
         conversations: {
           ...state.conversations,
-          [action.conversationId]: {
+          [conversationId]: {
             ...conversation,
             messages: {
               ...conversation.messages,
