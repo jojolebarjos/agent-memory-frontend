@@ -13,7 +13,8 @@ const initialState: WorkspaceState = {
   sync: { phase: 'connecting' },
   documents: {},
   conversations: {},
-  messageToConversations: {},
+  messageToConversation: {},
+  keyToDocument: {},
 }
 
 function bumpSync(sync: SyncState): SyncState {
@@ -70,6 +71,10 @@ function workspaceReducer(state: WorkspaceState, action: WorkspaceAction): Works
           ...state.documents,
           [action.document.id]: action.document,
         },
+        keyToDocument: {
+          ...state.keyToDocument,
+          [action.document.key]: action.document.id,
+        }
       }
 
     case 'message.created': {
@@ -87,15 +92,15 @@ function workspaceReducer(state: WorkspaceState, action: WorkspaceAction): Works
             },
           },
         },
-        messageToConversations: {
-          ...state.messageToConversations,
+        messageToConversation: {
+          ...state.messageToConversation,
           [action.message.id]: action.message.conversationId,
         }
       }
     }
 
     case 'fragment.created': {
-      const conversationId = state.messageToConversations[action.fragment.messageId]
+      const conversationId = state.messageToConversation[action.fragment.messageId]
       const conversation = state.conversations[conversationId]
       const message = conversation.messages[action.fragment.messageId]
       return {

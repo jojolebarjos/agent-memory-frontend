@@ -7,7 +7,8 @@ import './index.css'
 import { WorkspaceProvider } from './components/WorkspaceContext'
 import { DefaultPage } from './pages/DefaultPage'
 import { ConversationPage } from './pages/ConversationPage'
-import { DocumentKeyPage } from './pages/DocumentByKeyPage'
+import { DocumentByKeyPage } from './pages/DocumentByKeyPage'
+import { DocumentByTagPage } from './pages/DocumentByTagPage'
 import { Layout } from './pages/Layout'
 
 const WEBSOCKET_URL = `${window.location.protocol === 'https:' ? 'wss' : 'ws'}://${window.location.host}/ws`
@@ -20,7 +21,8 @@ createRoot(document.getElementById('root')!).render(
           <Route element={<Layout />}>
             <Route path="/" element={<DefaultPage />} />
             <Route path="/c/:conversationId" element={<ConversationPage />} />
-            <Route path="/k/:key" element={<DocumentKeyPage />} />
+            <Route path="/k/:key" element={<DocumentByKeyPage />} />
+            <Route path="/t/:tag" element={<DocumentByTagPage />} />
           </Route>
         </Routes>
       </BrowserRouter>

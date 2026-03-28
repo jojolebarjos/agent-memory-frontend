@@ -18,5 +18,6 @@ export interface WorkspaceState {
   sync: SyncState
   documents: Record<string, Document>
   conversations: Record<string, ConversationState>
-  messageToConversations: Record<string, string>
+  messageToConversation: Record<string, string>
+  keyToDocument: Record<string, string>
 }
