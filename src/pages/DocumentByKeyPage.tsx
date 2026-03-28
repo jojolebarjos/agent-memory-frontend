@@ -18,7 +18,7 @@ export function DocumentByKeyPage() {
   return (
     <div className="flex-1 overflow-y-auto">
       <div className="mx-auto max-w-3xl space-y-8 px-4 py-6">
-        <h1 className="font-mono text-sm text-neutral-400">{key}</h1>
+        <h1 className="font-mono text-sm text-neutral-400">${key}</h1>
         {documents.map(doc => (
           <Document key={doc.id} document={doc} />
         ))}
