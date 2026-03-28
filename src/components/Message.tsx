@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import type { Fragment } from '../types/protocol'
 import type { MessageState } from '../types/state'
+import { formatDateLong, formatDateShort } from '../utils/date'
 
 interface TreeNode extends Fragment {
   children: TreeNode[]
@@ -41,22 +42,6 @@ function FragmentView({ node }: { node: TreeNode }) {
   )
 }
 
-const SHORT_FORMATTER = new Intl.DateTimeFormat(
-  undefined,
-  {
-    dateStyle: "short",
-    timeStyle: "short",
-  }
-);
-
-const LONG_FORMATTER = new Intl.DateTimeFormat(
-  undefined,
-  {
-    dateStyle: "long",
-    timeStyle: "long",
-  }
-);
-
 interface Props {
   message: MessageState
 }
@@ -73,9 +58,9 @@ export function Message({ message }: Props) {
         <time
           className="text-xs text-neutral-400"
           dateTime={createdAt.toISOString()}
-          title={LONG_FORMATTER.format(createdAt)}
+          title={formatDateLong(createdAt)}
         >
-          {SHORT_FORMATTER.format(createdAt)}
+          {formatDateShort(createdAt)}
         </time>
       </div>
       <div className="space-y-1">
