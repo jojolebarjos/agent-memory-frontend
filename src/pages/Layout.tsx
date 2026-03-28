@@ -1,4 +1,5 @@
 import { Outlet } from 'react-router'
+import { Toaster } from 'sonner'
 import { useWorkspaceContext } from '../components/WorkspaceContext'
 import { SyncGate } from '../components/SyncGate'
 import { Sidebar } from '../components/Sidebar'
@@ -6,7 +7,7 @@ import { Sidebar } from '../components/Sidebar'
 export function Layout() {
   const { state } = useWorkspaceContext()
 
-  return (
+  return <>
     <SyncGate sync={state.sync}>
       <div className="flex h-screen">
         <Sidebar />
@@ -15,5 +16,6 @@ export function Layout() {
         </main>
       </div>
     </SyncGate>
-  )
+    <Toaster position="top-center" expand={true} closeButton richColors />
+  </>
 }

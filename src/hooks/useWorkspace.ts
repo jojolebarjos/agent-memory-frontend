@@ -1,13 +1,8 @@
 import { useReducer, useCallback } from 'react'
+import { toast } from 'sonner'
 import { useWebSocket, type WebSocketStatus } from './useWebSocket'
 import type { WorkspaceState, SyncState } from '../types/state'
-import type { ServerEvent, ClientCommand } from '../types/protocol'
-
-const notificationConsole: Record<string, (...args: unknown[]) => void> = {
-  info: console.info,
-  warning: console.warn,
-  error: console.error,
-}
+import type { ServerEvent, ClientCommand, NotificationKind } from '../types/protocol'
 
 const initialState: WorkspaceState = {
   sync: { phase: 'connecting' },
@@ -124,10 +119,27 @@ function workspaceReducer(state: WorkspaceState, action: WorkspaceAction): Works
         },
       }
     }
+  }
+  return state
+}
 
-    case 'notification':
-      notificationConsole[action.kind]?.(action.message)
-      return state
+function notify(kind: NotificationKind, content: string) {
+  switch (kind) {
+    case 'info': {
+      console.info(content)
+      toast.info(content)
+      break
+    }
+    case 'warning': {
+      console.warn(content)
+      toast.warning(content)
+      break
+    }
+    case 'error': {
+      console.error(content)
+      toast.error(content)
+      break
+    }
   }
 }
 
@@ -135,7 +147,11 @@ export function useWorkspace(url: string) {
   const [state, dispatch] = useReducer(workspaceReducer, initialState)
 
   const handlePayload = useCallback((raw: unknown) => {
-    dispatch(raw as ServerEvent)
+    const event = raw as ServerEvent
+    if (event.type === 'notification')
+      notify(event.kind, event.content)
+    else
+      dispatch(event)
   }, [])
 
   const handleStatusChange = useCallback((status: WebSocketStatus) => {

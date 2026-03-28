@@ -50,7 +50,7 @@ export type ServerEvent =
   | { type: 'conversation.created'; conversation: Conversation }
   | { type: 'message.created'; message: Message }
   | { type: 'fragment.created'; fragment: Fragment }
-  | { type: 'notification'; kind: NotificationKind; message: string }
+  | { type: 'notification'; kind: NotificationKind; content: string }
 
 export type ClientCommand =
   | { type: 'conversation.create'; title: string }
