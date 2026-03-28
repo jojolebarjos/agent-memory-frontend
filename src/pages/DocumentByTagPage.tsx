@@ -1,6 +1,8 @@
 import { useParams } from 'react-router'
+import { Hash } from 'lucide-react'
 import { useWorkspaceContext } from '../components/WorkspaceContext'
 import { Document } from '../components/Document'
+import { Empty } from '../components/Empty'
 
 export function DocumentByTagPage() {
   const { tag } = useParams<{ tag: string }>()
@@ -12,11 +14,7 @@ export function DocumentByTagPage() {
     .sort((a, b) => a.key.localeCompare(b.key))
 
   if (documents.length === 0)
-    return (
-      <div className="flex h-full items-center justify-center text-sm text-neutral-400">
-        No documents tagged <span className="ml-1 font-mono">#{tag}</span>.
-      </div>
-    )
+    return <Empty icon={Hash} message={`No documents tagged #${tag}.`} />
 
   return (
     <div className="flex-1 overflow-y-auto">

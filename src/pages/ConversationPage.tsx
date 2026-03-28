@@ -1,7 +1,9 @@
 import { useCallback } from 'react'
 import { useParams } from 'react-router'
+import { MessageSquare } from 'lucide-react'
 import { useWorkspaceContext } from '../components/WorkspaceContext'
 import { Conversation } from '../components/Conversation'
+import { Empty } from '../components/Empty'
 
 export function ConversationPage() {
   const { conversationId = "" } = useParams<{ conversationId: string }>()
@@ -34,6 +36,9 @@ export function ConversationPage() {
       </div>
     )
   }
+
+  if (!conversation)
+    return <Empty icon={MessageSquare} message="Conversation not found." />
 
   return (
     <div className="h-full">

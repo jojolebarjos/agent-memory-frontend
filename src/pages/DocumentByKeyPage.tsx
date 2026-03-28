@@ -1,6 +1,8 @@
 import { useParams } from 'react-router'
+import { FileText } from 'lucide-react'
 import { useWorkspaceContext } from '../components/WorkspaceContext'
 import { Document } from '../components/Document'
+import { Empty } from '../components/Empty'
 
 export function DocumentByKeyPage() {
   const { key } = useParams<{ key: string }>()
@@ -11,11 +13,7 @@ export function DocumentByKeyPage() {
     .sort((a, b) => b.version - a.version)
 
   if (documents.length === 0)
-    return (
-      <div className="flex h-full items-center justify-center text-sm text-neutral-400">
-        Document not found.
-      </div>
-    )
+    return <Empty icon={FileText} message="Document not found." />
 
   return (
     <div className="flex-1 overflow-y-auto">
