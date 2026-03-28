@@ -2,6 +2,7 @@ import { useMemo } from 'react'
 import type { Fragment } from '../types/protocol'
 import type { MessageState } from '../types/state'
 import { formatDateLong, formatDateShort } from '../utils/date'
+import { Content } from './Content'
 
 interface TreeNode extends Fragment {
   children: TreeNode[]
@@ -29,7 +30,7 @@ function FragmentView({ node }: { node: TreeNode }) {
   return (
     <div>
       <div className={fragmentStyles[node.kind]}>
-        {node.content}
+        <Content content={node.content} />
       </div>
       {node.children.length > 0 && (
         <div className="mt-1 space-y-1 pl-4">

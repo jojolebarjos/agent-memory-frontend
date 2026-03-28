@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router'
 import type { Document } from '../types/protocol'
 import { formatDateLong, formatDateShort } from '../utils/date'
+import { Content } from './Content'
 
 interface Props {
   document: Document
@@ -42,10 +43,14 @@ export function Document({ document }: Props) {
         )}
 
         {document.description && (
-          <p className="text-sm italic text-neutral-500">{document.description}</p>
+          <div className="text-sm italic text-neutral-500">
+            <Content content={document.description} />
+          </div>
         )}
 
-        <p className="whitespace-pre-wrap text-sm text-neutral-900">{document.content}</p>
+        <div className="text-sm text-neutral-900">
+          <Content content={document.content} />
+        </div>
       </div>
     </div>
   )
