@@ -1,7 +1,6 @@
 import { useMemo } from 'react'
 import type { Fragment } from '../types/protocol'
 import type { MessageState } from '../types/state'
-import { formatMessageDate } from '../utils/date'
 
 interface TreeNode extends Fragment {
   children: TreeNode[]
@@ -42,6 +41,22 @@ function FragmentView({ node }: { node: TreeNode }) {
   )
 }
 
+const SHORT_FORMATTER = new Intl.DateTimeFormat(
+  undefined,
+  {
+    dateStyle: "short",
+    timeStyle: "short",
+  }
+);
+
+const LONG_FORMATTER = new Intl.DateTimeFormat(
+  undefined,
+  {
+    dateStyle: "long",
+    timeStyle: "long",
+  }
+);
+
 interface Props {
   message: MessageState
 }
@@ -49,11 +64,19 @@ interface Props {
 export function Message({ message }: Props) {
   const tree = useMemo(() => buildTree(message.fragments), [message.fragments])
 
+  const createdAt = new Date(message.createdAt);
+
   return (
     <div className="space-y-1">
       <div className="flex items-baseline gap-2">
         <span className="text-sm font-medium">{message.userName}</span>
-        <span className="text-xs text-neutral-400">{formatMessageDate(message.createdAt)}</span>
+        <time
+          className="text-xs text-neutral-400"
+          dateTime={createdAt.toISOString()}
+          title={LONG_FORMATTER.format(createdAt)}
+        >
+          {SHORT_FORMATTER.format(createdAt)}
+        </time>
       </div>
       <div className="space-y-1">
         {tree.map(node => (
