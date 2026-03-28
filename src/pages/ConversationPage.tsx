@@ -1,14 +1,19 @@
 import { useCallback } from 'react'
-import { useParams, Navigate } from 'react-router'
+import { useParams } from 'react-router'
 import { useWorkspaceContext } from '../components/WorkspaceContext'
 import { Conversation } from '../components/Conversation'
 
 export function ConversationPage() {
-  const { conversationId } = useParams<{ conversationId: string }>()
+  const { conversationId = "" } = useParams<{ conversationId: string }>()
   const { state, drafts, setDraft, createMessage } = useWorkspaceContext()
 
-  if (!conversationId)
-    return <Navigate to="/" replace />
+  const handleSubmit = useCallback((content: string) => {
+    createMessage(conversationId, content)
+  }, [conversationId, createMessage])
+
+  const handleDraftChange = useCallback((draft: string) => {
+    setDraft(conversationId, draft)
+  }, [conversationId, setDraft])
 
   const conversation = state.conversations[conversationId]
 
@@ -29,17 +34,6 @@ export function ConversationPage() {
       </div>
     )
   }
-
-  if (!conversation)
-    return <Navigate to="/" replace />
-
-  const handleSubmit = useCallback((content: string) => {
-    createMessage(conversationId, content)
-  }, [conversationId, createMessage])
-
-  const handleDraftChange = useCallback((draft: string) => {
-    setDraft(conversationId, draft)
-  }, [conversationId, setDraft])
 
   return (
     <div className="h-full">
