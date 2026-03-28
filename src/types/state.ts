@@ -6,8 +6,10 @@ export type SyncState =
   | { phase: 'ready' }
   | { phase: 'error' }
 
+export interface FragmentState extends Fragment { }
+
 export interface MessageState extends Message {
-  fragments: Record<string, Fragment>
+  fragments: Record<string, FragmentState>
 }
 
 export interface ConversationState extends Conversation {
