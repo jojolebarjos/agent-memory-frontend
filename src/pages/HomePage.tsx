@@ -1,7 +1,7 @@
 import { Home } from 'lucide-react'
 import { Empty } from '../components/Empty'
 
-export function DefaultPage() {
+export function HomePage() {
   // TODO better home page
   return <>
     <title>Home</title>
