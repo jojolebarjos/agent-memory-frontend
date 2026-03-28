@@ -19,24 +19,6 @@ export function ConversationPage() {
 
   const conversation = state.conversations[conversationId]
 
-  if (state.sync.phase === 'connecting' || state.sync.phase === 'syncing') {
-    return (
-      <div className="flex h-full items-center justify-center text-sm text-neutral-400">
-        {state.sync.phase === 'syncing'
-          ? `Loading... ${state.sync.received} / ${state.sync.total}`
-          : 'Connecting...'}
-      </div>
-    )
-  }
-
-  if (state.sync.phase === 'error') {
-    return (
-      <div className="flex h-full items-center justify-center text-sm text-red-500">
-        Connection lost. Please reload the page.
-      </div>
-    )
-  }
-
   if (!conversation)
     return <Empty icon={MessageSquare} message="Conversation not found." />
 
