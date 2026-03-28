@@ -6,18 +6,16 @@ export type WebSocketStatus =
   | 'closed'
   | 'error'
 
-// TODO rename "Message" to avoid confusion with actual messages
-
 export function useWebSocket(
   url: string,
-  onMessage: (msg: unknown) => void,
+  onPayload: (payload: unknown) => void,
   onStatusChange?: (status: WebSocketStatus) => void,
 ) {
   const webSocketRef = useRef<WebSocket | null>(null)
-  const onMessageRef = useRef(onMessage)
+  const onPayloadRef = useRef(onPayload)
   const onStatusChangeRef = useRef(onStatusChange)
 
-  useEffect(() => { onMessageRef.current = onMessage }, [onMessage])
+  useEffect(() => { onPayloadRef.current = onPayload }, [onPayload])
   useEffect(() => { onStatusChangeRef.current = onStatusChange }, [onStatusChange])
 
   useEffect(() => {
@@ -29,21 +27,21 @@ export function useWebSocket(
     webSocket.onerror = () => onStatusChangeRef.current?.('error')
     webSocket.onmessage = (e) => {
       try {
-        onMessageRef.current(JSON.parse(e.data))
+        onPayloadRef.current(JSON.parse(e.data))
       }
       catch {
-        console.error('Failed to parse server message', e.data)
+        console.error('Failed to parse WebSocket payload', e.data)
       }
     }
 
     return () => webSocket.close()
   }, [url])
 
-  const send = useCallback((msg: unknown) => {
+  const send = useCallback((payload: unknown) => {
     if (webSocketRef.current?.readyState === WebSocket.OPEN) {
-      webSocketRef.current.send(JSON.stringify(msg))
+      webSocketRef.current.send(JSON.stringify(payload))
     } else {
-      console.warn('Attempted to send while socket not open', msg)
+      console.warn('Attempted to send while socket not open', payload)
     }
   }, [])
 

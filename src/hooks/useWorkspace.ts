@@ -134,7 +134,7 @@ function workspaceReducer(state: WorkspaceState, action: WorkspaceAction): Works
 export function useWorkspace(url: string) {
   const [state, dispatch] = useReducer(workspaceReducer, initialState)
 
-  const handleMessage = useCallback((raw: unknown) => {
+  const handlePayload = useCallback((raw: unknown) => {
     dispatch(raw as ServerEvent)
   }, [])
 
@@ -143,7 +143,7 @@ export function useWorkspace(url: string) {
       dispatch({ type: 'socket.error' })
   }, [])
 
-  const { send } = useWebSocket(url, handleMessage, handleStatusChange)
+  const { send } = useWebSocket(url, handlePayload, handleStatusChange)
 
   const createConversation = useCallback((title: string) => {
     send({ type: 'conversation.create', title } satisfies ClientCommand)
