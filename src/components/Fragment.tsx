@@ -17,9 +17,9 @@ export function buildTree(fragments: Record<string, FragmentState>): TreeNode[] 
 
 const fragmentStyles: Record<FragmentKind, string> = {
   text: 'text-neutral-900',
-  info: 'bg-blue-50 text-blue-900 rounded-md px-3 py-2',
-  warning: 'bg-yellow-50 text-yellow-900 rounded-md px-3 py-2',
-  error: 'bg-red-50 text-red-900 rounded-md px-3 py-2',
+  info: 'bg-info-light text-info-dark rounded-md px-3 py-2',
+  warning: 'bg-warning-light text-warning-dark rounded-md px-3 py-2',
+  error: 'bg-error-light text-error-dark rounded-md px-3 py-2',
   call: 'bg-neutral-100 text-neutral-700 rounded-md px-3 py-2 font-mono text-sm',
   structured: 'bg-neutral-100 text-neutral-700 rounded-md px-3 py-2 font-mono text-sm',
 }

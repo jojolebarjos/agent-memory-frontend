@@ -1,5 +1,23 @@
 @import "tailwindcss";
 
+@theme {
+  --color-normal-light: #ffffff;
+  --color-normal-medium: hsl(0, 0%, 93%);
+  --color-normal-dark: hsl(0, 0%, 9%);
+  --color-success-light: hsl(143, 85%, 96%);
+  --color-success-medium: hsl(145, 92%, 87%);
+  --color-success-dark: hsl(140, 100%, 27%);
+  --color-info-light: hsl(208, 100%, 97%);
+  --color-info-medium: hsl(221, 91%, 93%);
+  --color-info-dark: hsl(210, 92%, 45%);
+  --color-warning-light: hsl(49, 100%, 97%);
+  --color-warning-medium: hsl(49, 91%, 84%);
+  --color-warning-dark: hsl(31, 92%, 45%);
+  --color-error-light: hsl(359, 100%, 97%);
+  --color-error-medium: hsl(359, 100%, 94%);
+  --color-error-dark: hsl(360, 100%, 45%);
+}
+
 html, body, #root {
   height: 100%;
 }
