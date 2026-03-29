@@ -16,7 +16,7 @@ export function DocumentByKeyPage() {
     return <Empty icon={FileText} message="Document not found." />
 
   return <>
-    <title>{`\$${key}`}</title>
+    <title>{`$${key}`}</title>
     <div className="flex-1 overflow-y-auto">
       <div className="mx-auto max-w-3xl space-y-8 px-4 py-6">
         <h1 className="font-mono text-sm text-neutral-400">${key}</h1>
