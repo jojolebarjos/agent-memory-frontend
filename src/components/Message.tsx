@@ -1,17 +1,13 @@
-import { useMemo } from 'react'
 import type { MessageState } from '@/types/state'
 import { formatDateLong, formatDateShort } from '@/utils/date'
-import { Fragment, buildTree } from './Fragment'
+import { FragmentTree } from './FragmentTree'
 
 interface Props {
   message: MessageState
 }
 
 export function Message({ message }: Props) {
-  const tree = useMemo(() => buildTree(message.fragments), [message.fragments])
-
-  const createdAt = new Date(message.createdAt);
-
+  const createdAt = new Date(message.createdAt)
   return (
     <div className="space-y-1">
       <div className="flex items-baseline gap-2">
@@ -24,11 +20,7 @@ export function Message({ message }: Props) {
           {formatDateShort(createdAt)}
         </time>
       </div>
-      <div className="space-y-1">
-        {tree.map(node => (
-          <Fragment key={node.id} node={node} />
-        ))}
-      </div>
+      <FragmentTree fragments={message.fragments} />
     </div>
   )
 }

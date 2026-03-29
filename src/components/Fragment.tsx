@@ -1,18 +1,9 @@
-import type { Kind } from '@/types/protocol'
 import type { FragmentState } from '@/types/state'
+import type { Kind } from '@/types/protocol'
 import { Content } from './Content'
 
-interface TreeNode extends FragmentState {
+export interface TreeNode extends FragmentState {
   children: TreeNode[]
-}
-
-export function buildTree(fragments: Record<string, FragmentState>): TreeNode[] {
-  const values = Object.values(fragments)
-  const build = (f: FragmentState): TreeNode => ({
-    ...f,
-    children: values.filter(c => c.parentId === f.id).map(build)
-  })
-  return values.filter(f => !f.parentId).map(build)
 }
 
 const fragmentStyles: Record<Kind, string> = {
