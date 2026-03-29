@@ -1,6 +1,6 @@
 import { FileText, Hash, Home, MessageSquare } from 'lucide-react'
 import { NavLink } from 'react-router'
-import { useWorkspaceContext } from './WorkspaceContext'
+import { useWorkspaceContext } from '../hooks/useWorkspaceContext'
 import { SidebarSection } from './SidebarSection'
 
 export function Sidebar() {

@@ -1,8 +1,8 @@
 import { Outlet } from 'react-router'
 import { Toaster } from 'sonner'
-import { useWorkspaceContext } from '../components/WorkspaceContext'
 import { SyncGate } from '../components/SyncGate'
 import { Sidebar } from '../components/Sidebar'
+import { useWorkspaceContext } from '../hooks/useWorkspaceContext'
 
 export function Layout() {
   const { state } = useWorkspaceContext()

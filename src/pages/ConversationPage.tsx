@@ -1,9 +1,9 @@
 import { useCallback } from 'react'
 import { useParams } from 'react-router'
 import { MessageSquare } from 'lucide-react'
-import { useWorkspaceContext } from '../components/WorkspaceContext'
 import { Conversation } from '../components/Conversation'
 import { Empty } from '../components/Empty'
+import { useWorkspaceContext } from '../hooks/useWorkspaceContext'
 
 export function ConversationPage() {
   const { conversationId = "" } = useParams<{ conversationId: string }>()

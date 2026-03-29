@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router'
 
 import './index.css'
 
-import { WorkspaceProvider } from './components/WorkspaceContext'
+import { WorkspaceProvider } from './components/WorkspaceProvider'
 import { HomePage } from './pages/HomePage'
 import { ConversationPage } from './pages/ConversationPage'
 import { DocumentByKeyPage } from './pages/DocumentByKeyPage'
