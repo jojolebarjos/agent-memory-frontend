@@ -1,5 +1,5 @@
 import { createContext } from 'react'
-import type { WorkspaceState } from '../types/state'
+import type { WorkspaceState } from '@/types/state'
 
 interface WorkspaceContextValue {
   state: WorkspaceState

@@ -1,8 +1,8 @@
 import { useParams } from 'react-router'
 import { FileText } from 'lucide-react'
-import { Document } from '../components/Document'
-import { Empty } from '../components/Empty'
-import { useWorkspaceContext } from '../hooks/useWorkspaceContext'
+import { Document } from '@/components/Document'
+import { Empty } from '@/components/Empty'
+import { useWorkspaceContext } from '@/hooks/useWorkspaceContext'
 
 export function DocumentByKeyPage() {
   const { key } = useParams<{ key: string }>()

@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router'
-import type { Document } from '../types/protocol'
-import { formatDateLong, formatDateShort } from '../utils/date'
+import type { Document } from '@/types/protocol'
+import { formatDateLong, formatDateShort } from '@/utils/date'
 import { Content } from './Content'
 
 interface Props {

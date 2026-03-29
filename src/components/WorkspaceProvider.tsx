@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react'
-import { WorkspaceContext } from '../contexts/WorkspaceContext'
-import { useWorkspace } from '../hooks/useWorkspace'
+import { WorkspaceContext } from '@/contexts/WorkspaceContext'
+import { useWorkspace } from '@/hooks/useWorkspace'
 
 interface Props {
   url: string

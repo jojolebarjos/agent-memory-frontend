@@ -1,8 +1,8 @@
 import { useReducer, useCallback } from 'react'
 import { toast } from 'sonner'
 import { useWebSocket, type WebSocketStatus } from './useWebSocket'
-import type { WorkspaceState, SyncState } from '../types/state'
-import type { ServerEvent, ClientCommand, Kind } from '../types/protocol'
+import type { WorkspaceState, SyncState } from '@/types/state'
+import type { ServerEvent, ClientCommand, Kind } from '@/types/protocol'
 
 const initialState: WorkspaceState = {
   sync: { phase: 'connecting' },

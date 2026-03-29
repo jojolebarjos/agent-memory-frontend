@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
-import type { MessageState } from '../types/state'
-import { formatDateLong, formatDateShort } from '../utils/date'
+import type { MessageState } from '@/types/state'
+import { formatDateLong, formatDateShort } from '@/utils/date'
 import { Fragment, buildTree } from './Fragment'
 
 interface Props {

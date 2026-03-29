@@ -1,4 +1,4 @@
-import type { ConversationState } from '../types/state'
+import type { ConversationState } from '@/types/state'
 import { MessageList } from './MessageList'
 import { Input } from './Input'
 

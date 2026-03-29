@@ -1,5 +1,5 @@
-import type { Kind } from '../types/protocol'
-import type { FragmentState } from '../types/state'
+import type { Kind } from '@/types/protocol'
+import type { FragmentState } from '@/types/state'
 import { Content } from './Content'
 
 interface TreeNode extends FragmentState {

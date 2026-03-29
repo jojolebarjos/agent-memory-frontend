@@ -1,5 +1,5 @@
 import { Home } from 'lucide-react'
-import { Empty } from '../components/Empty'
+import { Empty } from '@/components/Empty'
 
 export function HomePage() {
   // TODO better home page

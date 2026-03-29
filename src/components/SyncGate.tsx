@@ -1,5 +1,5 @@
 import { Wifi, WifiOff } from 'lucide-react'
-import type { SyncState } from '../types/state'
+import type { SyncState } from '@/types/state'
 import { Empty } from './Empty'
 
 interface Props {

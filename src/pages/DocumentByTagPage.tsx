@@ -1,8 +1,8 @@
 import { useParams } from 'react-router'
 import { Hash } from 'lucide-react'
-import { Document } from '../components/Document'
-import { Empty } from '../components/Empty'
-import { useWorkspaceContext } from '../hooks/useWorkspaceContext'
+import { Document } from '@/components/Document'
+import { Empty } from '@/components/Empty'
+import { useWorkspaceContext } from '@/hooks/useWorkspaceContext'
 
 export function DocumentByTagPage() {
   const { tag } = useParams<{ tag: string }>()
