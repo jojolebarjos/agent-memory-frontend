@@ -2,8 +2,8 @@ import type { FragmentState } from '@/types/state'
 import type { Kind } from '@/types/protocol'
 import { Content } from './Content'
 
-export interface TreeNode extends FragmentState {
-  children: TreeNode[]
+export interface FragmentTreeNode extends FragmentState {
+  children: FragmentTreeNode[]
 }
 
 const fragmentStyles: Record<Kind, string> = {
@@ -14,7 +14,7 @@ const fragmentStyles: Record<Kind, string> = {
   error: 'bg-error-light text-error-dark rounded-md px-3 py-2',
 }
 
-export function Fragment({ node }: { node: TreeNode }) {
+export function Fragment({ node }: { node: FragmentTreeNode }) {
   return (
     <div>
       <div className={fragmentStyles[node.kind]}>

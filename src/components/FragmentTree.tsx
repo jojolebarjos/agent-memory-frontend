@@ -1,10 +1,6 @@
 import { useMemo } from 'react'
 import type { FragmentState } from '@/types/state'
-import { Fragment } from './Fragment'
-
-interface FragmentTreeNode extends FragmentState {
-  children: FragmentTreeNode[]
-}
+import { Fragment, type FragmentTreeNode } from './Fragment'
 
 function buildTree(fragments: Record<string, FragmentState>): FragmentTreeNode[] {
   const values = Object.values(fragments)
