@@ -1,12 +1,6 @@
-export type FragmentKind =
-  | 'text'
-  | 'structured'
-  | 'info'
-  | 'warning'
-  | 'error'
-  | 'call'
-
-export type NotificationKind =
+export type Kind =
+  | 'normal'
+  | 'success'
   | 'info'
   | 'warning'
   | 'error'
@@ -40,7 +34,7 @@ export interface Fragment {
   createdAt: string
   messageId: string
   parentId?: string
-  kind: FragmentKind
+  kind: Kind
   content: string
 }
 
@@ -50,7 +44,7 @@ export type ServerEvent =
   | { type: 'conversation.created'; conversation: Conversation }
   | { type: 'message.created'; message: Message }
   | { type: 'fragment.created'; fragment: Fragment }
-  | { type: 'notification'; kind: NotificationKind; content: string }
+  | { type: 'notification'; kind: Kind; content: string }
 
 export type ClientCommand =
   | { type: 'conversation.create'; title: string }

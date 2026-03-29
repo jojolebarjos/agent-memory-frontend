@@ -1,4 +1,4 @@
-import type { FragmentKind } from '../types/protocol'
+import type { Kind } from '../types/protocol'
 import type { FragmentState } from '../types/state'
 import { Content } from './Content'
 
@@ -15,13 +15,12 @@ export function buildTree(fragments: Record<string, FragmentState>): TreeNode[] 
   return values.filter(f => !f.parentId).map(build)
 }
 
-const fragmentStyles: Record<FragmentKind, string> = {
-  text: 'text-neutral-900',
+const fragmentStyles: Record<Kind, string> = {
+  normal: 'text-neutral-900',
+  success: 'bg-success-light text-success-dark rounded-md px-3 py-2',
   info: 'bg-info-light text-info-dark rounded-md px-3 py-2',
   warning: 'bg-warning-light text-warning-dark rounded-md px-3 py-2',
   error: 'bg-error-light text-error-dark rounded-md px-3 py-2',
-  call: 'bg-neutral-100 text-neutral-700 rounded-md px-3 py-2 font-mono text-sm',
-  structured: 'bg-neutral-100 text-neutral-700 rounded-md px-3 py-2 font-mono text-sm',
 }
 
 export function Fragment({ node }: { node: TreeNode }) {

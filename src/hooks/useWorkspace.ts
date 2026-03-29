@@ -2,7 +2,7 @@ import { useReducer, useCallback } from 'react'
 import { toast } from 'sonner'
 import { useWebSocket, type WebSocketStatus } from './useWebSocket'
 import type { WorkspaceState, SyncState } from '../types/state'
-import type { ServerEvent, ClientCommand, NotificationKind } from '../types/protocol'
+import type { ServerEvent, ClientCommand, Kind } from '../types/protocol'
 
 const initialState: WorkspaceState = {
   sync: { phase: 'connecting' },
@@ -123,8 +123,18 @@ function workspaceReducer(state: WorkspaceState, action: WorkspaceAction): Works
   return state
 }
 
-function notify(kind: NotificationKind, content: string) {
+function notify(kind: Kind, content: string) {
   switch (kind) {
+    case 'normal': {
+      console.info(content)
+      toast(content)
+      break
+    }
+    case 'success': {
+      console.info(content)
+      toast.success(content)
+      break
+    }
     case 'info': {
       console.info(content)
       toast.info(content)
