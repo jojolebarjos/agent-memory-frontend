@@ -1,4 +1,5 @@
 import { Home } from 'lucide-react'
+
 import { Empty } from '@/components/Empty'
 
 export function HomePage() {

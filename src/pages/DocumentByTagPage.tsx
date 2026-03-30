@@ -1,5 +1,6 @@
-import { useParams } from 'react-router'
 import { Hash } from 'lucide-react'
+import { useParams } from 'react-router'
+
 import { Document } from '@/components/Document'
 import { Empty } from '@/components/Empty'
 import { useWorkspaceContext } from '@/hooks/useWorkspaceContext'

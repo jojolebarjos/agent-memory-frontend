@@ -1,6 +1,7 @@
+import { MessageSquare } from 'lucide-react'
 import { useCallback } from 'react'
 import { useParams } from 'react-router'
-import { MessageSquare } from 'lucide-react'
+
 import { Conversation } from '@/components/Conversation'
 import { Empty } from '@/components/Empty'
 import { useWorkspaceContext } from '@/hooks/useWorkspaceContext'

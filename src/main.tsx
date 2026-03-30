@@ -1,14 +1,14 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import { BrowserRouter, Routes, Route } from 'react-router'
-
 import './index.css'
 
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import { BrowserRouter, Route,Routes } from 'react-router'
+
 import { WorkspaceProvider } from './components/WorkspaceProvider'
-import { HomePage } from './pages/HomePage'
 import { ConversationPage } from './pages/ConversationPage'
 import { DocumentByKeyPage } from './pages/DocumentByKeyPage'
 import { DocumentByTagPage } from './pages/DocumentByTagPage'
+import { HomePage } from './pages/HomePage'
 import { Layout } from './pages/Layout'
 
 const WEBSOCKET_URL = `${window.location.protocol === 'https:' ? 'wss' : 'ws'}://${window.location.host}/ws`

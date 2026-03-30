@@ -1,7 +1,8 @@
 import { Outlet } from 'react-router'
 import { Toaster } from 'sonner'
-import { SyncGate } from '@/components/SyncGate'
+
 import { Sidebar } from '@/components/Sidebar'
+import { SyncGate } from '@/components/SyncGate'
 import { useWorkspaceContext } from '@/hooks/useWorkspaceContext'
 
 export function Layout() {
