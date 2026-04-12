@@ -8,10 +8,11 @@ import { useWorkspaceContext } from '@/hooks/useWorkspaceContext'
 
 export function ConversationPage() {
   const { conversationId = "" } = useParams<{ conversationId: string }>()
-  const { state, drafts, setDraft, createMessage } = useWorkspaceContext()
+  const { state, drafts, setDraft, createMessage, createFragment } = useWorkspaceContext()
 
   const handleSubmit = useCallback((content: string) => {
-    createMessage(conversationId, content)
+    createMessage(conversationId)
+    createFragment("some id?", "normal", content)
   }, [conversationId, createMessage])
 
   const handleDraftChange = useCallback((draft: string) => {

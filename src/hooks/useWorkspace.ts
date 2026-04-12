@@ -177,9 +177,17 @@ export function useWorkspace(url: string) {
     send({ type: 'conversation.create', title } satisfies ClientCommand)
   }, [send])
 
-  const createMessage = useCallback((conversationId: string, content: string) => {
-    send({ type: 'message.create', conversationId, content } satisfies ClientCommand)
+  const createMessage = useCallback((conversationId: string) => {
+    send({ type: 'message.create', conversationId } satisfies ClientCommand)
   }, [send])
 
-  return { state, createConversation, createMessage }
+  const createFragment = useCallback((messageId: string, kind: Kind, content: string, parentId?: string) => {
+    send({ type: 'fragment.create', messageId, kind, content, parentId } satisfies ClientCommand)
+  }, [send])
+
+  const createDocument = useCallback((key: string, title: string, tags: string[], description: string, content: string) => {
+    send({ type: 'document.create', key, title, tags, description, content } satisfies ClientCommand)
+  }, [send])
+
+  return { state, createConversation, createMessage, createFragment, createDocument }
 }

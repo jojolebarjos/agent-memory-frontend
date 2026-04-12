@@ -47,5 +47,7 @@ export type ServerEvent =
   | { type: 'notification'; kind: Kind; content: string }
 
 export type ClientCommand =
+  | { type: 'document.create'; key: string; title: string, tags: string[]; description: string; content: string }
   | { type: 'conversation.create'; title: string }
-  | { type: 'message.create'; conversationId: string; content: string }
+  | { type: 'message.create'; conversationId: string }
+  | { type: 'fragment.create'; messageId: string; kind: Kind; content: string; parentId?: string }

@@ -9,7 +9,7 @@ interface Props {
 }
 
 export function WorkspaceProvider({ url, children }: Props) {
-  const { state, createConversation, createMessage } = useWorkspace(url)
+  const { state, createDocument, createConversation, createMessage, createFragment } = useWorkspace(url)
   const [drafts, setDrafts] = useState<Record<string, string>>({})
 
   const setDraft = useCallback((conversationId: string, draft: string) => {
@@ -17,7 +17,7 @@ export function WorkspaceProvider({ url, children }: Props) {
   }, [])
 
   return (
-    <WorkspaceContext.Provider value={{ state, drafts, setDraft, createConversation, createMessage }}>
+    <WorkspaceContext.Provider value={{ state, drafts, setDraft, createDocument, createConversation, createMessage, createFragment }}>
       {children}
     </WorkspaceContext.Provider>
   )
