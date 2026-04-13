@@ -1,14 +1,25 @@
 import type { MessageState } from '@/types/state'
 import { formatDateLong, formatDateShort } from '@/utils/date'
 
+import { Fragment } from './Fragment'
 import { FragmentTree } from './FragmentTree'
 
 interface Props {
   message: MessageState
 }
 
+const PENDING_NODE = {
+  id: '__pending__',
+  createdAt: '',
+  messageId: '',
+  kind: 'pending' as const,
+  content: 'Typing…',
+  children: [],
+}
+
 export function Message({ message }: Props) {
   const createdAt = new Date(message.createdAt)
+  const hasEnded = Object.values(message.fragments).some(f => f.kind === 'end')
   return (
     <div className="space-y-1">
       <div className="flex items-baseline gap-2">
@@ -22,6 +33,7 @@ export function Message({ message }: Props) {
         </time>
       </div>
       <FragmentTree fragments={message.fragments} />
+      {!hasEnded && <Fragment node={PENDING_NODE} />}
     </div>
   )
 }

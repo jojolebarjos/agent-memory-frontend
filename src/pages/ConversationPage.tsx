@@ -13,6 +13,7 @@ export function ConversationPage() {
   const handleSubmit = useCallback(async (content: string) => {
     const message = await createMessage(conversationId)
     await createFragment(message.id, "normal", content)
+    await createFragment(message.id, "end", "")
     // TODO should probably disable submission until done?
   }, [conversationId, createMessage, createFragment])
 

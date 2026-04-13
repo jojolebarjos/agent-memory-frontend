@@ -13,6 +13,8 @@ const fragmentStyles: Record<Kind, string> = {
   info: 'bg-info-light text-info-dark rounded-md px-3 py-2',
   warning: 'bg-warning-light text-warning-dark rounded-md px-3 py-2',
   error: 'bg-error-light text-error-dark rounded-md px-3 py-2',
+  pending: 'text-neutral-400 italic',
+  end: 'text-neutral-900 italic',
 }
 
 export function Fragment({ node }: { node: FragmentTreeNode }) {

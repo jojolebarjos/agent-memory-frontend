@@ -4,6 +4,8 @@ export type Kind =
   | 'info'
   | 'warning'
   | 'error'
+  | 'pending'
+  | 'end'
 
 export interface Document {
   id: string
