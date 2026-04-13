@@ -1,42 +1,4 @@
-export type Kind =
-  | 'normal'
-  | 'success'
-  | 'info'
-  | 'warning'
-  | 'error'
-
-export interface Document {
-  id: string
-  createdAt: string
-  key: string
-  version: number
-  title: string
-  tags: string[]
-  description: string
-  content: string
-}
-
-export interface Conversation {
-  id: string
-  createdAt: string
-  title: string
-}
-
-export interface Message {
-  id: string
-  createdAt: string
-  conversationId: string
-  userName: string
-}
-
-export interface Fragment {
-  id: string
-  createdAt: string
-  messageId: string
-  parentId?: string
-  kind: Kind
-  content: string
-}
+import type { Conversation, Document, Fragment, Kind, Message } from "./domain";
 
 export type ServerEvent =
   | { type: 'workspace.sync'; count: number }
@@ -46,7 +8,15 @@ export type ServerEvent =
   | { type: 'fragment.created'; fragment: Fragment }
   | { type: 'notification'; kind: Kind; content: string }
 
-export type ClientCommand =
+export type ServerResponse =
+  | { type: 'document.create.response'; requestId: string; document: Document }
+  | { type: 'conversation.create.response'; requestId: string; conversation: Conversation }
+  | { type: 'message.create.response'; requestId: string; message: Message }
+  | { type: 'fragment.create.response'; requestId: string; fragment: Fragment }
+
+export type ServerPayload = ServerEvent | ServerResponse
+
+export type ClientRequest =
   | { type: 'document.create'; key: string; title: string, tags: string[]; description: string; content: string }
   | { type: 'conversation.create'; title: string }
   | { type: 'message.create'; conversationId: string }

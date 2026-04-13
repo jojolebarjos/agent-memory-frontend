@@ -30,6 +30,7 @@ export function useWebSocket(
         onPayloadRef.current(JSON.parse(e.data))
       }
       catch {
+        // TODO should maybe close connection on error?
         console.error('Failed to parse WebSocket payload', e.data)
       }
     }

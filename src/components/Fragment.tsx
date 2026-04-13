@@ -1,4 +1,4 @@
-import type { Kind } from '@/types/protocol'
+import type { Kind } from '@/types/domain'
 import type { FragmentState } from '@/types/state'
 
 import { Content } from './Content'

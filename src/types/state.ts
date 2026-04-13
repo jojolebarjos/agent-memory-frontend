@@ -1,4 +1,4 @@
-import type { Conversation, Document, Fragment, Message } from './protocol'
+import type { Conversation, Document, Fragment, Message } from './domain'
 
 export type SyncState =
   | { phase: 'connecting' }

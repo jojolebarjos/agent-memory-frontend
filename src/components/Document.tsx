@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router'
 
-import type { Document } from '@/types/protocol'
+import type { Document } from '@/types/domain'
 import { formatDateLong, formatDateShort } from '@/utils/date'
 
 import { Content } from './Content'

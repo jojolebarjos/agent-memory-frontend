@@ -10,10 +10,11 @@ export function ConversationPage() {
   const { conversationId = "" } = useParams<{ conversationId: string }>()
   const { state, drafts, setDraft, createMessage, createFragment } = useWorkspaceContext()
 
-  const handleSubmit = useCallback((content: string) => {
-    createMessage(conversationId)
-    createFragment("some id?", "normal", content)
-  }, [conversationId, createMessage])
+  const handleSubmit = useCallback(async (content: string) => {
+    const message = await createMessage(conversationId)
+    await createFragment(message.id, "normal", content)
+    // TODO should probably disable submission until done?
+  }, [conversationId, createMessage, createFragment])
 
   const handleDraftChange = useCallback((draft: string) => {
     setDraft(conversationId, draft)

@@ -1,10 +1,12 @@
 import { useCallback, useReducer } from 'react'
 import { toast } from 'sonner'
 
-import type { ClientCommand, Kind, ServerEvent } from '@/types/protocol'
+import type { Kind } from '@/types/domain'
+import type { ServerEvent } from '@/types/protocol'
 import type { SyncState, WorkspaceState } from '@/types/state'
 
-import { useWebSocket, type WebSocketStatus } from './useWebSocket'
+import { useProtocol } from './useProtocol'
+import { type WebSocketStatus } from './useWebSocket'
 
 const initialState: WorkspaceState = {
   sync: { phase: 'connecting' },
@@ -158,8 +160,7 @@ function notify(kind: Kind, content: string) {
 export function useWorkspace(url: string) {
   const [state, dispatch] = useReducer(workspaceReducer, initialState)
 
-  const handlePayload = useCallback((raw: unknown) => {
-    const event = raw as ServerEvent
+  const handleEvent = useCallback((event: ServerEvent) => {
     if (event.type === 'notification')
       notify(event.kind, event.content)
     else
@@ -171,23 +172,35 @@ export function useWorkspace(url: string) {
       dispatch({ type: 'socket.error' })
   }, [])
 
-  const { send } = useWebSocket(url, handlePayload, handleStatusChange)
+  const { request } = useProtocol(url, handleEvent, handleStatusChange)
 
-  const createConversation = useCallback((title: string) => {
-    send({ type: 'conversation.create', title } satisfies ClientCommand)
-  }, [send])
+  const createDocument = useCallback(async (key: string, title: string, tags: string[], description: string, content: string) => {
+    const response = await request({ type: 'document.create', key, title, tags, description, content })
+    if (response.type !== 'document.create.response')
+      throw new Error(`Unexpected response type: ${response.type}`)
+    return response.document
+  }, [request])
 
-  const createMessage = useCallback((conversationId: string) => {
-    send({ type: 'message.create', conversationId } satisfies ClientCommand)
-  }, [send])
+  const createConversation = useCallback(async (title: string) => {
+    const response = await request({ type: 'conversation.create', title })
+    if (response.type !== 'conversation.create.response')
+      throw new Error(`Unexpected response type: ${response.type}`)
+    return response.conversation
+  }, [request])
 
-  const createFragment = useCallback((messageId: string, kind: Kind, content: string, parentId?: string) => {
-    send({ type: 'fragment.create', messageId, kind, content, parentId } satisfies ClientCommand)
-  }, [send])
+  const createMessage = useCallback(async (conversationId: string) => {
+    const response = await request({ type: 'message.create', conversationId })
+    if (response.type !== 'message.create.response')
+      throw new Error(`Unexpected response type: ${response.type}`)
+    return response.message
+  }, [request])
 
-  const createDocument = useCallback((key: string, title: string, tags: string[], description: string, content: string) => {
-    send({ type: 'document.create', key, title, tags, description, content } satisfies ClientCommand)
-  }, [send])
+  const createFragment = useCallback(async (messageId: string, kind: Kind, content: string, parentId?: string) => {
+    const response = await request({ type: 'fragment.create', messageId, kind, content, parentId })
+    if (response.type !== 'fragment.create.response')
+      throw new Error(`Unexpected response type: ${response.type}`)
+    return response.fragment
+  }, [request])
 
-  return { state, createConversation, createMessage, createFragment, createDocument }
+  return { state, createDocument, createConversation, createMessage, createFragment }
 }
