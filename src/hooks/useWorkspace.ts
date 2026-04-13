@@ -129,11 +129,13 @@ function workspaceReducer(state: WorkspaceState, action: WorkspaceAction): Works
 
 function notify(kind: Kind, content: string) {
   switch (kind) {
+    case 'pending':
     case 'normal': {
       console.info(content)
       toast(content)
       break
     }
+    case 'end':
     case 'success': {
       console.info(content)
       toast.success(content)
