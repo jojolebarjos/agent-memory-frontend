@@ -1,0 +1,8 @@
+{
+  "name": "slides",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:22",
+  "forwardPorts": [
+    8080
+  ],
+  "postCreateCommand": "npm install"
+}
